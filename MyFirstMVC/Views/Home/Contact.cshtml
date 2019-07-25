@@ -1,0 +1,118 @@
+﻿@model MyFirstMVC.Models.ContactViewModel
+    <header class="entry-title">
+        <h2 style="color: darkslategrey">İLETİŞİM</h2>
+    </header>
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Anasayfa</a></li>
+                <li class="breadcrumb-item active" aria-current="page">İletişim</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <!--form etiketini kaldırıp formu bu şekilde tanımlıyoruz MVC5'de bu şekilde yapılıyor-->
+            @using (Html.BeginForm())
+            {
+                if (!string.IsNullOrEmpty(ViewBag.Message))
+                {
+                    <div class="alert alert-danger">@ViewBag.Error</div>
+                }
+                if (!string.IsNullOrEmpty(ViewBag.Message))
+                {
+                    <div class="alert alert-success">@ViewBag.Message</div>
+                }
+                <!--hata mesajı gösterebiliyor-->
+                @Html.ValidationSummary(false)
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.FirstName, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "Ad" })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.LastName, new { @class = "col-md-2 col-form-label" })
+
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Soyad" })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Phone, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", placeholder = "Telefon" })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Email, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "E-posta" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Message, new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Message, new { @class = "form-control", placeholder = "Mesajınız.." })
+                        @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-10 offset-md-2">
+                        @Html.CheckBoxFor(model => model.PrivacyPolicyAccepted)
+                        <label for="PrivacyPolicyAccepted">
+                            <a href="@Url.Action("Kvkk","Home")" target="_blank">KVKK Aydınlatma Metnini okudum ve kabul ediyorum.</a>
+                        </label>
+                        @Html.ValidationMessageFor(model => model.PrivacyPolicyAccepted, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-10 col-md-offset-2">
+                        <button type="submit" class="btn btn-primary">Gönder</button>
+                    </div>
+                </div>
+            }
+            <div class="input-group mb-3">
+                <div>
+                    <span class="input-group-text" id="basic-addon1">İsim : </span>
+                </div>
+                <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <div>
+                    <span class="input-group-text" id="basic-addon1">E-posta* : </span>
+                </div>
+                <input type="text" class="form-control" placeholder="email@example.com" aria-label="Email" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Mesaj: </span>
+                </div>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+            <br>
+            <div>
+                <button type="button" class="btn btn-primary">Gönder</button>
+            </div>
+        </div>
+        <div class="col-6" style="margin:0 auto">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.13848402532!2d29.004627715415197!3d41.04410057929719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7a24975fe5d%3A0xa05d7aa13cfcaf89!2sWissen!5e0!3m2!1str!2str!4v1563435199771!5m2!1str!2str" width="500" height="400" frameborder="0" style="border:0 " allowfullscreen></iframe>
+        </div>
+    </div>
+    <address>
+        One Microsoft Way<br />
+        Redmond, WA 98052-6399<br />
+        <abbr title="Phone">P:</abbr>
+        425.555.0100
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    </address>

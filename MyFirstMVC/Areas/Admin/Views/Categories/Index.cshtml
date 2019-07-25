@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MyFirstMVC.Models.Category>
+
+@{
+    ViewBag.Title = "Kategoriler";
+}
+
+<h2>Kategoriler</h2>
+
+<p>
+    @Html.ActionLink("Yeni Kategori", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Id)</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>Eylemler</th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        <a href="@Url.Action("Edit", new { id = item.Id})" class="btn btn-success">Düzenle</a>
+        <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-sm" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</a>
+    </td>
+</tr>
+}
+
+</table>
