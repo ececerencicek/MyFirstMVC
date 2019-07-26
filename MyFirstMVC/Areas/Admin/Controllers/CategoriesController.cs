@@ -96,7 +96,7 @@ namespace MyFirstMVC.Areas.Admin.Controllers
                     item.CategoryId = null;
                 }
                 db.SaveChanges();
-
+                /////------/////
                 if (category != null)
                 {
                     db.Categories.Remove(category);

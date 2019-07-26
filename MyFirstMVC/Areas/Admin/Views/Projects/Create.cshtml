@@ -1,8 +1,10 @@
 ﻿@model MyFirstMVC.Models.Project
 @{
-    /**/
+                /**/
 
-    ViewBag.Title = "Create";
+                /**/
+
+                ViewBag.Title = "Create";
 }
 <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script>
 <style>
@@ -11,16 +13,16 @@
     }
 </style>
 <h2>Yeni PROJE</h2>
-@using (Html.BeginForm())
+<!--formun içindeki upload işlemi çalışsın diye multipart/form-data koyuyoruz-->
+@using (Html.BeginForm("Create", "Projects", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.ValidationSummary(false)
-    <div class="form-group row">
-        @Html.LabelFor(model => model.Photo, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Photo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+    if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
         </div>
-    </div>
+    }
+    @Html.ValidationSummary(false)
     <div class="form-group row">
         @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -55,8 +57,15 @@
     <div class="form-group row">
         @Html.LabelFor(model => model.CategoryId, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.CategoryId, (IEnumerable<SelectListItem>)ViewBag.Categories, "Kategori Seçiniz" , new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.CategoryId, (IEnumerable<SelectListItem>)ViewBag.Categories, "Kategori Seçiniz", new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Photo, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <!--input type file gözat butounun çıkmasını sağlıyor.-->
+            <input type="file" name="Upload" id="Upload" class="form-control" />
         </div>
     </div>
     <div class="form-group" row>
